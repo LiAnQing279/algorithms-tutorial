@@ -127,12 +127,10 @@ void Test0()
         {10, 20, 70},
         {200, 150, 250}};
     TreeNode *root = SetTree(vals, sons);
-    // cout << root->m_nValue << endl;
-    constPtr p = findVal(root, 70);
-    // cout << p->m_nValue << endl;
-    constPtr q = findVal(root, 150);
     // PrintTree(root);
-    // Test("Test0", root, q, p, root);
+    constPtr p = findVal(root, 70);
+    constPtr q = findVal(root, 100);
+    Test("Test0", root, q, p, root);
 }
 
 // 形状普通的树
@@ -235,10 +233,10 @@ void Test4()
 int main(int argc, char *argv[])
 {
     Test0();
-    // Test1();
-    // Test2();
-    // Test3();
-    // Test4();
+    Test1();
+    Test2();
+    Test3();
+    Test4();
 
     return 0;
 }

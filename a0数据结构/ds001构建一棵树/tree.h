@@ -40,24 +40,24 @@ void PrintTreeNode(const Ptr pNode)
 {
     if (pNode != nullptr)
     {
-        printf("value of this node is: %d.\n", pNode->m_nValue);
-
-        printf("its children is as the following:\n");
+        printf("value : %d -> ", pNode->m_nValue);
         vector<Ptr>::const_iterator i = pNode->m_vChildren.begin();
-        while (i < pNode->m_vChildren.end())
+        bool hasChild = false;
+        while (i != pNode->m_vChildren.end())
         {
             if (*i != nullptr)
                 printf("%d\t", (*i)->m_nValue);
+            ++i;
+            hasChild = true;
         }
-
+        if (!hasChild)
+            printf(" null");
         printf("\n");
     }
     else
     {
         printf("this node is nullptr.\n");
     }
-
-    printf("\n");
 }
 
 void PrintTree(const Ptr pRoot)
