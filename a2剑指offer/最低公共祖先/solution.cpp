@@ -88,7 +88,7 @@ int main()
     BiTree bitree(v);
 
     Solution sol;
-    TNptr ans = sol.lowestCommonAncestor(bitree.find(12344), bitree.find(444), bitree.find(201));
+    Ptr ans = sol.lowestCommonAncestor(bitree.find(12344), bitree.find(444), bitree.find(201));
     cout << ans->val << endl;
     return 0;
 }

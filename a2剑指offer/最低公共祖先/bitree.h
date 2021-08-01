@@ -23,7 +23,7 @@ Ptr setNode(T val)
     return new TreeNode(val);
 }
 
-//二叉树，构建，销毁，打印
+//二叉树，构建，销毁，打印，检索
 class BiTree
 {
 private:
