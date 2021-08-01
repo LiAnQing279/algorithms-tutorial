@@ -15,10 +15,10 @@ struct TreeNode
 };
 
 //辅助工具
-typedef TreeNode *TNptr;
+typedef TreeNode *Ptr; //树节点指针
 
 template <typename T>
-TNptr setNode(T val)
+Ptr setNode(T val)
 {
     return new TreeNode(val);
 }
@@ -27,16 +27,16 @@ TNptr setNode(T val)
 class BiTree
 {
 private:
-    TNptr m_root = nullptr;
-    void destroy(TNptr);
-    void preVis(TNptr);
-    TNptr getPtr(TNptr, int);
+    Ptr m_root = nullptr;
+    void destroy(Ptr);
+    void preVis(Ptr);
+    Ptr getPtr(Ptr, int);
 
 public:
     BiTree(vector<int> vals);
     ~BiTree();
 
-    TNptr find(int val);
+    Ptr find(int val);
     void printTree();
 };
 
@@ -50,7 +50,7 @@ BiTree::BiTree(vector<int> vals)
     if (vals.empty() || vals[0] == -1)
         return;
 
-    queue<TNptr> que;
+    queue<Ptr> que;
     m_root = setNode(vals[0]);
     que.push(m_root);
 
@@ -58,7 +58,7 @@ BiTree::BiTree(vector<int> vals)
     int loops = len / 2;
     for (int i = 0; i < loops; i++)
     {
-        TNptr ptr = que.front();
+        Ptr ptr = que.front();
         que.pop();
         if (!ptr)
             continue;
@@ -80,11 +80,11 @@ BiTree::~BiTree()
 {
     destroy(m_root);
 }
-void BiTree::destroy(TNptr ptr)
+void BiTree::destroy(Ptr ptr)
 {
     if (!ptr)
         return;
-    TNptr tmp = ptr;
+    Ptr tmp = ptr;
     destroy(tmp->left);
     destroy(tmp->right);
 
@@ -98,7 +98,7 @@ void BiTree::printTree()
     preVis(m_root);
 }
 
-void BiTree::preVis(TNptr ptr)
+void BiTree::preVis(Ptr ptr)
 {
     if (ptr)
     {
@@ -107,17 +107,17 @@ void BiTree::preVis(TNptr ptr)
         preVis(ptr->right);
     }
 }
-TNptr BiTree::find(int val)
+Ptr BiTree::find(int val)
 {
     return getPtr(m_root, val);
 }
-TNptr BiTree::getPtr(TNptr ptr, int goal)
+Ptr BiTree::getPtr(Ptr ptr, int goal)
 {
     if (ptr)
     {
         if (ptr->val == goal)
             return ptr;
-        TNptr l = getPtr(ptr->left, goal);
+        Ptr l = getPtr(ptr->left, goal);
         if (!l)
             return getPtr(ptr->right, goal);
         else
