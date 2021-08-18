@@ -30,20 +30,28 @@ class ListSet
 	Nptr m_header = nullptr;
 	int m_size = 0;
 	Nptr find(int t_val); //查找后移动到开头
+	void insert_helper(int t_val);
 };
 
 void ListSet::insert(int t_val)
 {
-	Nptr newNode = new Node(t_val, m_header->next);
-	m_header->next = newNode;
-	m_size++;
+	if (contains(t_val))
+		return;
+	insert_helper(t_val);
 }
 inline void ListSet::keepOdd(int val)
 {
-	if (!contains(val))
-		insert(val);
-	else
-		erase(val);
+	Nptr pos = find(val);
+	if (pos) {
+		//删除第一个节点
+		m_header->next = pos->next;
+		m_size--;
+		//释放空间
+		delete pos;
+		pos = nullptr;
+	} else {
+		insert_helper(val);
+	}
 }
 void ListSet::erase(int t_val)
 {
@@ -78,6 +86,13 @@ inline ListSet::Nptr ListSet::find(int t_val)
 	return goal;
 }
 
+inline void ListSet::insert_helper(int t_val)
+{
+	Nptr newNode = new Node(t_val, m_header->next);
+	m_header->next = newNode;
+	m_size++;
+}
+
 inline void ListSet::clear()
 {
 	Nptr ptr = m_header->next;
@@ -86,6 +101,7 @@ inline void ListSet::clear()
 		delete ptr;
 		ptr = m_header->next;
 	}
+	m_size = 0;
 }
 
 inline void ListSet::print()
@@ -103,18 +119,20 @@ inline void ListSet::print()
 void test_list_set()
 {
 	ds::ListSet set;
-	int arr[] = {1, 1, 1, 2, 2, 3, 3, 4, 3, 5, 5, 6};
+	int arr[] = {111, 121, 131, 121, 132, 132};
+	int arr_n = 6;
 
-	for (size_t i = 0; i < 12; i++) {
-		if (set.contains(arr[i]))
-			continue;
+	for (size_t i = 0; i < arr_n; i++) {
 		set.insert(arr[i]);
 	}
 	set.print();
+	std::cout << set.size() << std::endl;
 
 	set.clear();
-	for (size_t i = 0; i < 12; i++) {
+	for (size_t i = 0; i < arr_n; i++) {
 		set.keepOdd(arr[i]);
 	}
 	set.print();
+
+	std::cout << set.size() << std::endl;
 }
