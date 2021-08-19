@@ -1,5 +1,13 @@
-
-//实现后缀表达式值
+/**
+ * @file postfixVal.cpp
+ * @author LiAnQing279
+ * @brief 计算逆波兰表示式的值
+ * @version 0.1
+ * @date 2021-08-19
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include "listStack.hpp"
 #include <string>
 using std::string;

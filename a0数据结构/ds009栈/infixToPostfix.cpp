@@ -1,4 +1,13 @@
-
+/**
+ * @file infixToPostfix.cpp
+ * @author LiAnQing279
+ * @brief 将中缀表达式转化为后缀表达式（逆波兰表达式）
+ * @version 0.1
+ * @date 2021-08-19
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include "listStack.hpp"
 #include <map>
 #include <string>
