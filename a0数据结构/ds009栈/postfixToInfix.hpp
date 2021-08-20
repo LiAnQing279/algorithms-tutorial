@@ -2,9 +2,9 @@
 /**
  * @file infixToPostfix.cpp
  * @author LiAnQing279
- * @brief 将后缀表达式转化为中缀表达式
+ * @brief 后缀转为中缀表达式
  * @version 0.1
- * @date 2021-08-20
+ * @date 2021-08-19
  *
  * @copyright Copyright (c) 2021
  *
@@ -18,7 +18,6 @@ using std::map;
 using std::stack;
 using std::string;
 
-//---------------------------粗暴的加上括号---------------------//
 using strPtr = string *;
 
 bool isOP(char t_ch)
@@ -61,7 +60,7 @@ int postfixToInfix(string &t_postfix, string &t_infix)
 			strPtr a = stk.top();
 			stk.pop();
 
-			string tmp = "(" + *a + *nxt + *b + ")";
+			string tmp = "(" + *a + *nxt + *b + ")"; //粗暴的加括号
 			stk.push(new string(tmp));
 			delete a;
 			delete b;
@@ -107,7 +106,7 @@ midPtr getNext2(int &t_id, string &t_exp)
 	t_id++; //跳过空格
 
 	string *val = new string(t_exp.substr(start, t_id - start - 1));
-	int lev = 0; //数字的级别设置为零
+	int lev = 0;
 
 	return new middle(val, lev);
 }
@@ -158,9 +157,10 @@ int postfixToInfix2(string &t_postfix, string &t_infix)
 #define out(x) std::cout << (x) << '#' << std::endl;
 int main()
 {
-	string str = "10 230 50 40 - * + 900 3 / - ";
+	string str = "101 230 50 40 - * + 900 13 / - ";
 	string str1 = "11 33 522 * + 71 9 - / ";
 	string str2 = "10 20 50 40 - * + 900 3000 + / ";
+	string str3 = "12 91 64 344 / + 4445 - * 401 + ";
 	string infix = "";
 	/*
 	int i = 0;
@@ -174,6 +174,8 @@ int main()
 	postfixToInfix2(str1, infix);
 	out(infix);
 	postfixToInfix2(str2, infix);
+	out(infix);
+	postfixToInfix2(str3, infix);
 	out(infix);
 	return 0;
 }
