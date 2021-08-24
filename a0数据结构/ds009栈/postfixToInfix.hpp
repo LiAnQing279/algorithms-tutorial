@@ -111,6 +111,25 @@ midPtr getNext2(int &t_id, string &t_exp)
 	return new middle(val, lev);
 }
 
+midPtr addParentheses(midPtr a, midPtr b, midPtr nxt)
+{
+	string astr = *(a->val);
+	string bstr = *(b->val);
+
+	int blev = b->level;
+	int alev = a->level;
+	int oplev = level[nxt->val->at(1)];
+
+	//只有中间符号高于某一边时，才需要套上括号;特别的，数字不用
+	if (alev && oplev > alev)
+		astr = "(" + *(a->val) + ")";
+	if (blev && oplev > blev)
+		bstr = "(" + *(b->val) + ")";
+
+	string tmp = astr + *(nxt->val) + bstr;
+	return new middle(new string(tmp), oplev)
+}
+
 int postfixToInfix2(string &t_postfix, string &t_infix)
 {
 	stack<midPtr> stk;
@@ -125,21 +144,8 @@ int postfixToInfix2(string &t_postfix, string &t_infix)
 			stk.pop();
 			midPtr a = stk.top();
 			stk.pop();
-
-			int blev = b->level;
-			int alev = a->level;
-			int oplev = level[nxt->val->at(1)];
-
-			string astr = *(a->val);
-			string bstr = *(b->val);
-			//只有中间符号高于两边时，才需要套上括号;特别的，数字不用
-			if (alev && oplev > alev)
-				astr = "(" + *(a->val) + ")";
-			if (blev && oplev > blev)
-				bstr = "(" + *(b->val) + ")";
-			string tmp = astr + *(nxt->val) + bstr;
-
-			stk.push(new middle(new string(tmp), oplev));
+			//添加圆括号
+			stk.push(addParentheses(a, b, nxt));
 			delete a;
 			delete b;
 			delete nxt;
