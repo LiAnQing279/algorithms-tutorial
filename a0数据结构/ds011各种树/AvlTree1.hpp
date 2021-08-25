@@ -1,7 +1,7 @@
 #ifndef AVL_TREE_H
 #define AVL_TREE_H
 
-#include "dsexceptions.h"
+#include "dsexceptions.hpp"
 #include <algorithm>
 #include <iostream>
 using namespace std;
