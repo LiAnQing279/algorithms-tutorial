@@ -43,7 +43,7 @@ class BinaryTree
 
 	~BinaryTree() { makeEmpty(); }
 
-	const BinaryTree &operator=(const BinaryTree &rhs);
+	const BinaryTree &operator=(const BinaryTree &rhs); //深度拷贝
 
 	// Recursive traversals, with printing
 	void printPreOrder() const
